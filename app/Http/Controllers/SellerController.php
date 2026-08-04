@@ -31,7 +31,7 @@ class SellerController extends Controller
         // Monthly revenue chart data (SQLite compatible using strftime)
         $monthlyRevenue = Order::where('seller_id', $user->id)
             ->where('status', 'completed')
-            ->selectRaw("strftime('%m', created_at) as month, SUM(total_price) as revenue")
+            ->selectRaw("DATE_FORMAT(created_at,'%m') as month, SUM(total_price) as revenue")
             ->groupBy('month')
             ->orderBy('month')
             ->get();
