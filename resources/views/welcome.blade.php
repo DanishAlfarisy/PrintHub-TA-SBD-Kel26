@@ -89,8 +89,8 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-14"><h2 class="text-4xl font-bold text-gray-800 mb-4">Layanan Kami</h2><p class="text-gray-500 text-lg">Semua kebutuhan cetak tersedia di sini</p></div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                @foreach([['fa-file-alt','bg-blue-500','Print Dokumen','HVS, A4, F4'],['fa-palette','bg-pink-500','Print Berwarna','Full color'],['fa-copy','bg-green-500','Fotocopy','Cepat & murah'],['fa-book','bg-orange-500','Jilid','Soft & hard cover'],['fa-layer-group','bg-purple-500','Laminating','Glossy & doff'],['fa-qrcode','bg-teal-500','Scan','Resolusi tinggi'],['fa-image','bg-red-500','Banner','Cetak besar'],['fa-plus-circle','bg-gray-500','Lainnya','Hubungi kami']] as [$icon,$color,$label,$desc])
-                <div class="card-hover bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+                @foreach([['fa-file-alt','bg-blue-500','Print Dokumen','HVS, A4, F4','hover:bg-blue-100'],['fa-palette','bg-pink-500','Print Berwarna','Full color','hover:bg-pink-100'],['fa-copy','bg-green-500','Fotocopy','Cepat & murah','hover:bg-green-100'],['fa-book','bg-orange-500','Jilid','Soft & hard cover','hover:bg-orange-100'],['fa-layer-group','bg-purple-500','Laminating','Glossy & doff','hover:bg-purple-100'],['fa-qrcode','bg-teal-500','Scan','Resolusi tinggi','hover:bg-teal-100'],['fa-image','bg-red-500','Banner','Cetak besar','hover:bg-red-100'],['fa-plus-circle','bg-gray-500','Lainnya','Hubungi kami','hover:bg-gray-200']] as [$icon,$color,$label,$desc,$backgroundcolor])
+                <div class="card-hover bg-white rounded-2xl {{ $backgroundcolor }} p-6 text-center shadow-sm border border-gray-100">
                     <div class="w-14 h-14 {{ $color }} rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas {{ $icon }} text-white text-xl"></i></div>
                     <h3 class="font-bold text-gray-800 mb-1">{{ $label }}</h3>
                     <p class="text-gray-400 text-sm">{{ $desc }}</p>
