@@ -80,17 +80,25 @@
         <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1.5">Alamat Lengkap</label>
             <div class="relative">
-                <span class="absolute left-3 top-3 text-gray-400 text-sm"><i class="fas fa-map-marker-alt"></i></span>
+                <span class="absolute left-3 top-3 text-gray-20 text-sm"><i class="fas fa-map-marker-alt"></i></span>
                 <textarea name="address" required rows="2"
                     class="input-focus w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-white resize-none"
                     placeholder="Jalan, Kota, Provinsi">{{ old('address') }}</textarea>
             </div>
+             <button
+            type="button"
+            id="openMapModal"
+            class="btn-primary w-auto py-2 px-4 text-white font-semibold rounded-xl text-sm mt-2">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Pilih Lokasi</span>
+
+        </button>
         </div>
 
         <!-- Seller-only fields -->
         <div id="seller-fields" class="{{ old('role') === 'seller' ? '' : 'hidden' }}">
             <div class="p-4 bg-purple-50 border border-purple-100 rounded-xl space-y-3">
-                <p class="text-sm font-semibold text-purple-700"><i class="fas fa-store mr-1"></i>Informasi Toko</p>
+                <p class="text-sm font-semibold text-gray-700"><i class="fas fa-store mr-1"></i>Informasi Toko</p>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Toko</label>
                     <input type="text" name="store_name" value="{{ old('store_name') }}"
@@ -139,6 +147,48 @@
     </div>
 </div>
 
+<!-- Modal Google Maps -->
+<div id="mapModal"
+     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+
+    <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center p-5 border-b">
+
+            <h2 class="text-xl font-bold">
+                Pilih Lokasi 
+            </h2>
+            <button id="closeMapModal"
+                    class="text-gray-500 hover:text-red-500 text-xl">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+        </div>
+
+        <!-- Isi -->
+        <div class="p-5">
+
+            <div id="map"
+                class="h-[450px] rounded-xl bg-gray-100 flex items-center justify-center">
+
+                <span class="text-gray-500">
+                    Google Maps 
+                </span>
+
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="p-5 border-t flex justify-end">
+            <button
+                class="btn-primary px-6 py-2 text-white rounded-xl">
+                Gunakan Lokasi
+            </button>
+        </div>
+    </div>
+</div>
 <script>
     const roleInputs = document.querySelectorAll('input[name="role"]');
     const cardBuyer = document.getElementById('card-buyer');
@@ -158,5 +208,34 @@
             sellerFields.classList.toggle('hidden', radio.value !== 'seller');
         });
     });
+
+const mapModal = document.getElementById("mapModal");
+const openMap = document.getElementById("openMapModal");
+const closeMap = document.getElementById("closeMapModal");
+
+openMap.addEventListener("click", function () {
+
+    mapModal.classList.remove("hidden");
+    mapModal.classList.add("flex");
+
+});
+
+closeMap.addEventListener("click", function () {
+
+    mapModal.classList.add("hidden");
+    mapModal.classList.remove("flex");
+
+});
+
+mapModal.addEventListener("click", function(e){
+
+    if(e.target === mapModal){
+
+        mapModal.classList.add("hidden");
+        mapModal.classList.remove("flex");
+
+    }
+
+});
 </script>
 @endsection
