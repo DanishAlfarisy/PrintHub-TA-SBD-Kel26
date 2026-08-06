@@ -322,7 +322,7 @@ useLocationBtn.addEventListener("click",()=>{
 });
 </script>
 <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRkN4wARWsnlQZL6zpdaiDIv6Ecu2BqeI&callback=initMap"
+src="https://maps.googleapis.com/maps/api/js?key=MASUKKANKEYDISINIYA&callback=initMap"
 async
 defer>
 </script>
