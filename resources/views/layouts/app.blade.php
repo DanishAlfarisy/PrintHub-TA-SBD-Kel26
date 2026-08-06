@@ -81,6 +81,10 @@
             <!-- User Menu -->
             <div class="flex items-center gap-3">
                 @auth
+                @php 
+                $user = auth()->user();
+                $routePrefix = $user->isBuyer() ? 'buyer.' : 'seller.';
+                @endphp
                     <div class="relative group">
                         <button class="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all">
                             <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white text-sm font-bold">
@@ -96,6 +100,11 @@
                             <div class="p-3 border-b border-gray-100">
                                 <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
                                 <p class="text-xs text-gray-500">{{ auth()->user()->email }}</p>
+                            </div>
+                            <div class="p-1">
+                                    <a href="{{ route($routePrefix.'profile') }}" class="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-all">
+                                        <i class="fas fa-user mr-2"></i>Profil
+                                    </a>
                             </div>
                             <div class="p-1">
                                 <form method="POST" action="{{ route('logout') }}">
@@ -164,3 +173,4 @@
 @yield('scripts')
 </body>
 </html>
+

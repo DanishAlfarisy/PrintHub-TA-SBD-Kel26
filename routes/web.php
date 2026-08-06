@@ -30,6 +30,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // Buyer routes
 Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->name('buyer.')->group(function () {
     Route::get('/dashboard', [BuyerController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [BuyerController::class, 'profile'])->name('profile');
     Route::get('/services', [BuyerController::class, 'services'])->name('services');
     Route::get('/services/{service}', [BuyerController::class, 'serviceDetail'])->name('services.show');
     Route::get('/orders', [OrderController::class, 'buyerIndex'])->name('orders');
@@ -43,7 +44,7 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->name('buyer.')->grou
 // Seller routes
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->name('seller.')->group(function () {
     Route::get('/dashboard', [SellerController::class, 'dashboard'])->name('dashboard');
-
+    Route::get('/profile', [SellerController::class, 'profile'])->name('profile');
     // Services CRUD
     Route::get('/services', [ServiceController::class, 'index'])->name('services');
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');

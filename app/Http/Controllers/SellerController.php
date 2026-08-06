@@ -42,4 +42,11 @@ class SellerController extends Controller
             'recentOrders', 'monthlyRevenue'
         ));
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('seller.profile', compact('user'));
+    }
+
 }

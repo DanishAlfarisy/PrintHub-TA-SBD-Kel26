@@ -47,4 +47,10 @@ class BuyerController extends Controller
         }
         return view('buyer.services.show', compact('service'));
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('buyer.profile', compact('user'));
+    }
 }
