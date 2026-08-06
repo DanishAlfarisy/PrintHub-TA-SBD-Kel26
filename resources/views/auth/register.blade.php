@@ -317,7 +317,6 @@ function getAddress(location){
     });
 }
 useLocationBtn.addEventListener("click",()=>{
-    alert(selectedAddress)
     mapModal.classList.add("hidden");
     mapModal.classList.remove("flex");
 });
