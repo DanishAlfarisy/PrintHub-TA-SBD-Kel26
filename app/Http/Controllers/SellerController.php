@@ -28,7 +28,7 @@ class SellerController extends Controller
                               ->take(5)
                               ->get();
 
-        // Monthly revenue chart data (SQLite compatible using strftime)
+        // Monthly revenue chart data
         $monthlyRevenue = Order::where('seller_id', $user->id)
             ->where('status', 'completed')
             ->selectRaw("DATE_FORMAT(created_at,'%m') as month, SUM(total_price) as revenue")

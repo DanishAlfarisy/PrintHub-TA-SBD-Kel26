@@ -80,7 +80,7 @@
         <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1.5">Alamat Lengkap</label>
             <div class="relative">
-                <span class="absolute left-3 top-3 text-gray-20 text-sm"><i class="fas fa-map-marker-alt"></i></span>
+                <span class="absolute left-3 top-3 text-gray-400 text-sm"><i class="fas fa-map-marker-alt"></i></span>
                 <textarea name="address" required rows="2"
                     class="input-focus w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-white resize-none"
                     placeholder="Jalan, Kota, Provinsi">{{ old('address') }}</textarea>
@@ -150,39 +150,31 @@
 <!-- Modal Google Maps -->
 <div id="mapModal"
      class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
-
     <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl">
-
         <!-- Header -->
         <div class="flex justify-between items-center p-5 border-b">
-
             <h2 class="text-xl font-bold">
                 Pilih Lokasi 
             </h2>
             <button id="closeMapModal"
                     class="text-gray-500 hover:text-red-500 text-xl">
-
                 <i class="fas fa-times"></i>
-
             </button>
-
         </div>
-
         <!-- Isi -->
         <div class="p-5">
 
             <div id="map"
                 class="h-[450px] rounded-xl bg-gray-100 flex items-center justify-center">
-
                 <span class="text-gray-500">
                     Google Maps 
                 </span>
-
             </div>
         </div>
         <!-- Footer -->
         <div class="p-5 border-t flex justify-end">
             <button
+                id="useLocationBtn"
                 class="btn-primary px-6 py-2 text-white rounded-xl">
                 Gunakan Lokasi
             </button>
@@ -209,9 +201,22 @@
         });
     });
 
+let map;
+let marker;
+let geocoder;
+let selectedAddress = "";
+
 const mapModal = document.getElementById("mapModal");
 const openMap = document.getElementById("openMapModal");
 const closeMap = document.getElementById("closeMapModal");
+const useLocationBtn = document.getElementById("useLocationBtn");
+const addressTextarea = document.querySelector("textarea[name='address']");
+
+console.log(mapModal);
+console.log(openMap);
+console.log(closeMap);
+console.log(useLocationBtn);
+console.log(addressTextarea);
 
 openMap.addEventListener("click", function () {
 
@@ -236,6 +241,90 @@ mapModal.addEventListener("click", function(e){
 
     }
 
+})
+
+function initMap(){
+
+    geocoder = new google.maps.Geocoder();
+
+    const defaultLocation = {
+      lat: -7.05382,
+    lng: 110.43889
+    };
+
+    map = new google.maps.Map(document.getElementById("map"),{
+
+        center: defaultLocation,
+        zoom:16
+
+    });
+
+    marker = new google.maps.Marker({
+
+        position: defaultLocation,
+
+        map: map,
+
+        draggable:true
+
+    });
+
+    if (navigator.geolocation) {
+
+    navigator.geolocation.getCurrentPosition(function(position){
+
+        const currentLocation = {
+
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+
+        };
+
+        map.setCenter(currentLocation);
+
+        marker.setPosition(currentLocation);
+
+        getAddress(currentLocation);
+
+    });
+
+}
+
+    marker.addListener("dragend",function(){
+
+        getAddress(marker.getPosition());
+
+    });
+    map.addListener("click",function(event){
+        marker.setPosition(event.latLng);
+        getAddress(event.latLng);
+    });
+}
+function getAddress(location){
+    
+    geocoder.geocode({
+
+        location:location
+
+    },function(results,status){
+
+        if(status==="OK"){
+
+            if(results[0]){
+                selectedAddress=results[0].formatted_address;
+            }
+        }
+    });
+}
+useLocationBtn.addEventListener("click",()=>{
+    alert(selectedAddress)
+    mapModal.classList.add("hidden");
+    mapModal.classList.remove("flex");
 });
+</script>
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRkN4wARWsnlQZL6zpdaiDIv6Ecu2BqeI&callback=initMap"
+async
+defer>
 </script>
 @endsection
