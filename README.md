@@ -2,7 +2,7 @@
 
 ## Deskripsi Umum
 
-PrintHub adalah website pemesanan fotokopi secara online yang dikembangkan sebagai tugas mata kuliah **Rekayasa Perangkat Lunak**. Sistem ini dibuat untuk mempermudah pengguna dalam melakukan pemesanan fotokopi, mengunggah dokumen, dan mengatur kebutuhan cetak secara online tanpa harus datang langsung ke tempat fotokopi.
+PrintHub adalah website pemesanan fotokopi secara online yang dikembangkan sebagai tugas mata kuliah **Sistem Basis Data**. Sistem ini dibuat untuk mempermudah pengguna dalam melakukan pemesanan fotokopi, mengunggah dokumen, dan mengatur kebutuhan cetak secara online tanpa harus datang langsung ke tempat fotokopi.
 
 Link video Demo : 
 https://drive.google.com/drive/folders/1hAG6WLyuEa0-Cm_DA2fz-4OYeSBaoUG7?usp=sharing
